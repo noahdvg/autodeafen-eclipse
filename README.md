@@ -2,10 +2,19 @@
 
 Windows Geode mod for Geometry Dash.
 
-- Press **Left Shift or Right Shift** during a level to open the setup popup.
-- Choose the percentage where the mod should press your Discord **Toggle Deafen** key.
-- Click **Set Key**, then press a key. The popup displays readable names such as `F8`, `J`, or `Space`.
-- The mod presses the key again when you die, complete, restart, quit, or disable the feature.
-- Eclipse also gets an **Auto Deafen** toggle and **Auto Deafen Setup** button in its Player section.
+## Behavior
 
-Make sure Discord has a **Toggle Deafen** keybind set to the same key.
+- Press **Left Shift while inside a level** to open the setup popup.
+- Enable or disable Auto Deafen.
+- Set the percentage at which the configured key is pressed.
+- Click **Record**, release all keys, then press one key. Only the first key is saved.
+- The popup displays names like **F8**, **J**, **Space**, etc.
+- When the percentage is reached, the key is pressed once.
+- On death, restart, completion, or leaving the level, the same key is pressed again.
+- A **Test key** button lets you verify that Discord receives the key.
+
+Set the same key in Discord under **User Settings > Keybinds > Toggle Deafen**.
+
+## Online build
+
+The included GitHub Actions workflow builds the Windows `.geode` artifact.
