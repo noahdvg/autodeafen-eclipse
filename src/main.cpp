@@ -1,6 +1,8 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/PlayLayer.hpp>
 #include <Geode/ui/Popup.hpp>
+#include <Geode/loader/GameEvent.hpp>
+#include <Geode/loader/SettingV3.hpp>
 #include <eclipse/eclipse.hpp>
 
 #ifdef GEODE_IS_WINDOWS
@@ -13,8 +15,8 @@ namespace {
     constexpr int DEFAULT_KEY = 0x77; // F8
 
     bool g_deafenKeyWasSent = false;
-    bool g_leftShiftWasDown = false;
     bool g_popupOpen = false;
+    bool g_inPlayLayer = false;
 
     bool enabled() {
         return Mod::get()->getSettingValue<bool>("enabled");
@@ -135,7 +137,7 @@ namespace {
             if (!Popup::init(400.f, 250.f)) return false;
             setTitle("Auto Deafen");
 
-            auto subtitle = CCLabelBMFont::create("Left Shift opens this menu during a level", "goldFont.fnt");
+            auto subtitle = CCLabelBMFont::create("Press Shift in a level to open this menu", "goldFont.fnt");
             subtitle->setScale(.4f);
             subtitle->setPosition({200.f, 207.f});
             m_mainLayer->addChild(subtitle);
@@ -301,7 +303,7 @@ namespace {
         player.addToggle("noah.autodeafen-eclipse/enabled", "Auto Deafen", [](bool value) {
             Mod::get()->setSettingValue("enabled", value);
             if (!value) undeafenForAttempt();
-        }).setDescription("Left Shift in a level opens the Auto Deafen setup menu.");
+        }).setDescription("Press the configured menu keybind in a level to open setup.");
         eclipse::config::set("noah.autodeafen-eclipse/enabled", enabled());
 
         player.addButton("Auto Deafen Setup", [] { openPopup(); })
@@ -313,12 +315,24 @@ $on_mod(Loaded) {
     registerEclipseControls();
 }
 
+$on_game(Loaded) {
+    // Geode's native keybind listener is much more reliable than polling
+    // GetAsyncKeyState from PlayLayer::update. The default is Shift, so
+    // either physical Shift key can open the popup.
+    listenForKeybindSettingPresses("open-menu-keybind", [](
+        Keybind const&, bool down, bool repeat, double
+    ) {
+        if (!down || repeat || !g_inPlayLayer || g_popupOpen) return;
+        openPopup();
+    });
+}
+
 class $modify(AutoDeafenPlayLayer, PlayLayer) {
     bool init(GJGameLevel* level, bool useReplay, bool dontCreateObjects) {
         if (!PlayLayer::init(level, useReplay, dontCreateObjects)) return false;
         g_deafenKeyWasSent = false;
-        g_leftShiftWasDown = false;
         g_popupOpen = false;
+        g_inPlayLayer = true;
         return true;
     }
 
@@ -340,17 +354,12 @@ class $modify(AutoDeafenPlayLayer, PlayLayer) {
     void onQuit() {
         undeafenForAttempt();
         g_popupOpen = false;
+        g_inPlayLayer = false;
         PlayLayer::onQuit();
     }
 
     void update(float dt) {
         PlayLayer::update(dt);
-
-#ifdef GEODE_IS_WINDOWS
-        const bool shiftDown = (GetAsyncKeyState(VK_LSHIFT) & 0x8000) != 0;
-        if (shiftDown && !g_leftShiftWasDown && !g_popupOpen) openPopup();
-        g_leftShiftWasDown = shiftDown;
-#endif
 
         if (!enabled() || m_isPracticeMode || g_popupOpen || g_deafenKeyWasSent) return;
         if (getCurrentPercent() >= deafenPercent()) deafenForAttempt();
