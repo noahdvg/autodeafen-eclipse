@@ -5,9 +5,9 @@
   },
   "id": "noah.autodeafen-eclipse",
   "name": "Auto Deafen for Eclipse",
-  "version": "v1.1.0",
+  "version": "v1.2.0",
   "developer": "noah",
-  "description": "Press Left Shift in-game to configure automatic deafen and undeafen percentages plus the voice-app keybind.",
+  "description": "Automatically deafens at a chosen percentage and undeafens on death, completion, restart, or exit. Press either Shift key to configure it.",
   "dependencies": {
     "eclipse.eclipse-menu": {
       "version": ">=1.9.4",
@@ -17,31 +17,15 @@
   "settings": {
     "enabled": {
       "name": "Auto Deafen",
-      "description": "Enable automatic deafen/undeafen while playing a level.",
+      "description": "Enable automatic deafen while playing a level.",
       "type": "bool",
       "default": false
     },
-    "shortcut-vk": {
-      "name": "Shortcut virtual-key code",
-      "description": "Windows virtual-key code sent to your voice app. F8 is 119.",
-      "type": "int",
-      "default": 119,
-      "min": 1,
-      "max": 255
-    },
     "deafen-percent": {
       "name": "Deafen at (%)",
-      "description": "Press the shortcut when progress first reaches this percentage.",
+      "description": "Press your chosen Discord Toggle Deafen key when progress reaches this percentage.",
       "type": "float",
       "default": 7.0,
-      "min": 0.0,
-      "max": 100.0
-    },
-    "undeafen-percent": {
-      "name": "Undeafen at (%)",
-      "description": "Press the shortcut again when progress first reaches this percentage.",
-      "type": "float",
-      "default": 100.0,
       "min": 0.0,
       "max": 100.0
     }
