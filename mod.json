@@ -5,9 +5,9 @@
   },
   "id": "noah.autodeafen-eclipse",
   "name": "Auto Deafen for Eclipse",
-  "version": "v1.3.0",
+  "version": "v1.4.0",
   "developer": "noah",
-  "description": "Mega-Hack-style Auto Deafen: press Left Shift in a level to configure a readable recorded keybind and deafen percentage; the key is pressed again on death, completion, restart, or exit.",
+  "description": "Auto Deafen with an in-level configuration popup opened by a native Geode Shift keybind. Records a readable Discord toggle-deafen key and presses it at the chosen percentage, then again on death, restart, completion, or exit.",
   "dependencies": {
     "eclipse.eclipse-menu": {
       "version": ">=1.9.4",
@@ -28,6 +28,13 @@
       "default": 7.0,
       "min": 0.0,
       "max": 100.0
+    },
+    "open-menu-keybind": {
+      "name": "Open Auto Deafen Menu",
+      "description": "Open the Auto Deafen popup while you are inside a level. Shift works with either left or right Shift key.",
+      "type": "keybind",
+      "default": "Shift",
+      "category": "gameplay"
     }
   }
 }
