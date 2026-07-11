@@ -5,9 +5,9 @@
   },
   "id": "noah.autodeafen-eclipse",
   "name": "Auto Deafen for Eclipse",
-  "version": "v1.2.0",
+  "version": "v1.3.0",
   "developer": "noah",
-  "description": "Automatically deafens at a chosen percentage and undeafens on death, completion, restart, or exit. Press either Shift key to configure it.",
+  "description": "Mega-Hack-style Auto Deafen: press Left Shift in a level to configure a readable recorded keybind and deafen percentage; the key is pressed again on death, completion, restart, or exit.",
   "dependencies": {
     "eclipse.eclipse-menu": {
       "version": ">=1.9.4",
