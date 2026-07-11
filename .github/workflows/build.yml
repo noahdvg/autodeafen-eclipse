@@ -3,26 +3,19 @@ name: Build AutoDeafen Eclipse
 on:
   workflow_dispatch:
   push:
-    branches:
-      - "**"
+    branches: [ main ]
 
 jobs:
   build-windows:
     runs-on: windows-latest
     steps:
-      - name: Check out source
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Build Windows Geode mod
-        id: build
         uses: geode-sdk/build-geode-mod@main
         with:
           target: Win64
-          sdk: latest
-          build-config: Release
-
-      - name: Upload autodeafen-eclipse.geode
+      - name: Upload compiled mod
         uses: actions/upload-artifact@v4
         with:
           name: autodeafen-eclipse
-          path: ${{ steps.build.outputs.build-output }}
+          path: build/*.geode
