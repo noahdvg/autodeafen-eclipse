@@ -1,20 +1,14 @@
 # Auto Deafen for Eclipse
 
-Windows Geode mod for Geometry Dash.
+Version 1.4 uses Geode's native keybind system to open the custom popup reliably.
 
-## Behavior
+## In game
 
-- Press **Left Shift while inside a level** to open the setup popup.
-- Enable or disable Auto Deafen.
-- Set the percentage at which the configured key is pressed.
-- Click **Record**, release all keys, then press one key. Only the first key is saved.
-- The popup displays names like **F8**, **J**, **Space**, etc.
-- When the percentage is reached, the key is pressed once.
-- On death, restart, completion, or leaving the level, the same key is pressed again.
-- A **Test key** button lets you verify that Discord receives the key.
+1. Enter a level.
+2. Press either Shift key (default).
+3. Toggle Auto Deafen, choose a percentage, click **Record**, release all keys, and press one key such as F8 or J.
+4. Use **Test key** to verify Discord receives it.
 
-Set the same key in Discord under **User Settings > Keybinds > Toggle Deafen**.
+The selected key is pressed once at the chosen percentage and once again when you die, restart, complete, or leave the level.
 
-## Online build
-
-The included GitHub Actions workflow builds the Windows `.geode` artifact.
+The popup-opening key can also be changed in Geode settings under **Open Auto Deafen Menu**.
