@@ -361,7 +361,15 @@ class $modify(AutoDeafenPlayLayer, PlayLayer) {
     void update(float dt) {
         PlayLayer::update(dt);
 
-        if (!enabled() || m_isPracticeMode || g_popupOpen || g_deafenKeyWasSent) return;
-        if (getCurrentPercent() >= deafenPercent()) deafenForAttempt();
+        if (!enabled() || m_isPracticeMode || g_deafenKeyWasSent) return;
+
+        // Geode/GD builds may expose progress either as 0..100 or 0..1.
+        // Normalize both formats so a setting like 7% always triggers at 7%.
+        float progress = getCurrentPercent();
+        if (progress >= 0.f && progress <= 1.001f) progress *= 100.f;
+
+        if (progress + 0.001f >= deafenPercent()) {
+            deafenForAttempt();
+        }
     }
 };
