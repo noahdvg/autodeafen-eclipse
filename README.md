@@ -12,3 +12,8 @@ Version 1.4 uses Geode's native keybind system to open the custom popup reliably
 The selected key is pressed once at the chosen percentage and once again when you die, restart, complete, or leave the level.
 
 The popup-opening key can also be changed in Geode settings under **Open Auto Deafen Menu**.
+
+
+## v1.5.0 fix
+- Fixes percentage triggering by supporting both 0-1 and 0-100 progress formats.
+- The recorded key is pressed once at the chosen percentage and once again on death, restart, completion, or exit.
