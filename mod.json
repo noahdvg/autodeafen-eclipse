@@ -5,9 +5,9 @@
   },
   "id": "noah.autodeafen-eclipse",
   "name": "Auto Deafen for Eclipse",
-  "version": "v1.4.0",
+  "version": "v1.5.0",
   "developer": "noah",
-  "description": "Auto Deafen with an in-level configuration popup opened by a native Geode Shift keybind. Records a readable Discord toggle-deafen key and presses it at the chosen percentage, then again on death, restart, completion, or exit.",
+  "description": "Auto Deafen with an in-level configuration popup opened by a native Geode Shift keybind. Records a readable Discord toggle-deafen key and normalizes level progress correctly, presses it at the chosen percentage, then again on death, restart, completion, or exit.",
   "dependencies": {
     "eclipse.eclipse-menu": {
       "version": ">=1.9.4",
